@@ -6,7 +6,12 @@ export const pokemonRouter = createTRPCRouter({
     .input(z.string())
     .query(async ({ ctx, input }) => {
       const pokemon = await ctx.db.pokemon.findFirst({
-        where: { name: input },
+        where: {
+          name: {
+            equals: input.toLowerCase(),
+            mode: "insensitive",
+          },
+        },
         include: { types: true },
       });
       if (!pokemon) throw new Error(`Pokemon with name ${input} not found`);
@@ -21,7 +26,12 @@ export const pokemonRouter = createTRPCRouter({
     .input(z.array(z.string()))
     .query(async ({ ctx, input }) => {
       const pokemons = await ctx.db.pokemon.findMany({
-        where: { name: { in: input } },
+        where: {
+          name: {
+            in: input.map((name) => name.toLowerCase()),
+            mode: "insensitive",
+          },
+        },
         include: { types: true },
       });
       return pokemons.map((pokemon) => ({
