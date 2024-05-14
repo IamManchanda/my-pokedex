@@ -21,20 +21,22 @@ A simple Pokedex application built with Next.js, TypeScript, Prisma, and tRPC.
 
 ### Home Page
 
-![Home Page](https://github.com/IamManchanda/my-pokedex/assets/4970624/245df00a-aa70-4191-9757-7021f94fdeb3)
+![Home Page](https://github.com/IamManchanda/my-pokedex/assets/4970624/a8d3e40a-417a-4935-90db-60361691bfcf)
 
 ### Search for Pokemon
 
-![Search for individual Pokemon](https://github.com/IamManchanda/my-pokedex/assets/4970624/8c823b4b-52bf-42eb-90ba-c86f9d8fc79d)
+![Search for individual Pokemon - form input](https://github.com/IamManchanda/my-pokedex/assets/4970624/7d6886cd-58f7-4270-9c73-29e70c61d23a)
+![Search for individual Pokemon - Result](https://github.com/IamManchanda/my-pokedex/assets/4970624/42e70d33-682a-4b17-861c-9f4946889670)
 
 ### Search for multiple Pokemon
 
-![Search for multiple Pokemon](https://github.com/IamManchanda/my-pokedex/assets/4970624/4c105b3e-7cbf-4158-96f3-638402b36e78)
+![Search for multiple Pokemon - form input](https://github.com/IamManchanda/my-pokedex/assets/4970624/d043d7ae-3d87-492f-b0d4-390e3de3b5ce)
+![Search for multiple Pokemon - Result](https://github.com/IamManchanda/my-pokedex/assets/4970624/7f2cece8-fbff-41ab-bfea-4048ccffa532)
 
 ### Filter Pokemon by type
 
-![Filter Pokemon by type - select input](https://github.com/IamManchanda/my-pokedex/assets/4970624/89c723f2-e005-4674-91cb-acc535142e19)
-![Filter Pokemon by type - Result](https://github.com/IamManchanda/my-pokedex/assets/4970624/34fd9fed-00cf-4c7b-9f2f-7277153928f3)
+![Filter Pokemon by type - select input](https://github.com/IamManchanda/my-pokedex/assets/4970624/a38e533a-30fd-4e53-a368-8780d67cbc40)
+![Filter Pokemon by type - Result](https://github.com/IamManchanda/my-pokedex/assets/4970624/af094111-34db-446b-a79f-72ae9f30cc24)
 
 ## Prerequisites
 
