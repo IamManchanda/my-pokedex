@@ -11,7 +11,7 @@ export function PokemonForm() {
   const [pokemon, setPokemon] = useState<PokemonWithTypes | null>(null);
 
   const { data, refetch, isFetching, error } = api.pokemon.getPokemon.useQuery(
-    name,
+    name.trim(),
     {
       enabled: false,
     },
