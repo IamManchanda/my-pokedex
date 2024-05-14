@@ -53,6 +53,8 @@ cd my-pokedex
 
 ### 2. Set Up Environment Variables
 
+> Note: Before proceeding, make sure you have Docker installed on your machine. Also, make sure to comment out `directUrl = env("DIRECT_URL")` in the `prisma/schema.prisma` file as it is not required for local development.
+
 Create a .env file in the root directory of the project and add the following variables:
 
 ```bash
@@ -119,4 +121,4 @@ npx prisma studio
 
 ## Deployment
 
-Work in progress...
+Deployment for this application has been done using Vercel and Supabase.
