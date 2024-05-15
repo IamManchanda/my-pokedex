@@ -18,7 +18,7 @@ export function PokemonForm() {
   );
 
   useEffect(() => {
-    if (data) {
+    if (data && !Array.isArray(data)) {
       setPokemon(data);
     }
   }, [data]);
@@ -27,7 +27,7 @@ export function PokemonForm() {
     e.preventDefault();
     try {
       const result = await refetch();
-      if (result.data) {
+      if (result.data && !Array.isArray(result.data)) {
         setPokemon(result.data);
       }
     } catch (err) {

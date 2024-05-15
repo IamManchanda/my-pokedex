@@ -10,7 +10,7 @@ export function PokemonArrayForm() {
   const [names, setNames] = useState("");
   const [pokemons, setPokemons] = useState<PokemonWithTypes[] | null>(null);
 
-  const { refetch, data, error } = api.pokemon.getPokemonArray.useQuery(
+  const { refetch, data, error } = api.pokemon.getPokemon.useQuery(
     names.split(",").map((name) => name.trim()),
     {
       enabled: false,
@@ -21,7 +21,7 @@ export function PokemonArrayForm() {
     e.preventDefault();
     try {
       const result = await refetch();
-      if (result.data) {
+      if (result.data && Array.isArray(result.data)) {
         setPokemons(result.data);
       }
     } catch (err) {
@@ -30,7 +30,7 @@ export function PokemonArrayForm() {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data && Array.isArray(data)) {
       setPokemons(data);
     }
   }, [data]);
