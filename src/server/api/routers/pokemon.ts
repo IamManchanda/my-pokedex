@@ -3,43 +3,47 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const pokemonRouter = createTRPCRouter({
   getPokemon: publicProcedure
-    .input(z.string())
+    .input(z.union([z.string(), z.array(z.string())]))
     .query(async ({ ctx, input }) => {
-      const pokemon = await ctx.db.pokemon.findFirst({
-        where: {
-          name: {
-            equals: input.toLowerCase(),
-            mode: "insensitive",
+      if (typeof input === "string") {
+        const pokemon = await ctx.db.pokemon.findFirst({
+          where: {
+            name: {
+              equals: input.toLowerCase(),
+              mode: "insensitive",
+            },
           },
-        },
-        include: { types: true },
-      });
-      if (!pokemon) throw new Error(`Pokemon with name ${input} not found`);
-      return {
-        id: pokemon.id,
-        name: pokemon.name,
-        types: pokemon.types.map((t) => t.type),
-        sprite: pokemon.sprite,
-      };
-    }),
-  getPokemonArray: publicProcedure
-    .input(z.array(z.string()))
-    .query(async ({ ctx, input }) => {
-      const pokemons = await ctx.db.pokemon.findMany({
-        where: {
-          name: {
-            in: input.map((name) => name.toLowerCase()),
-            mode: "insensitive",
+          include: { types: true },
+        });
+
+        if (!pokemon) {
+          throw new Error(`Pokemon with name ${input} not found`);
+        }
+
+        return {
+          id: pokemon.id,
+          name: pokemon.name,
+          types: pokemon.types.map((t) => t.type),
+          sprite: pokemon.sprite,
+        };
+      } else {
+        const pokemons = await ctx.db.pokemon.findMany({
+          where: {
+            name: {
+              in: input.map((name) => name.toLowerCase()),
+              mode: "insensitive",
+            },
           },
-        },
-        include: { types: true },
-      });
-      return pokemons.map((pokemon) => ({
-        id: pokemon.id,
-        name: pokemon.name,
-        types: pokemon.types.map((t) => t.type),
-        sprite: pokemon.sprite,
-      }));
+          include: { types: true },
+        });
+
+        return pokemons.map((pokemon) => ({
+          id: pokemon.id,
+          name: pokemon.name,
+          types: pokemon.types.map((t) => t.type),
+          sprite: pokemon.sprite,
+        }));
+      }
     }),
   getPokemonByType: publicProcedure
     .input(
@@ -58,6 +62,7 @@ export const pokemonRouter = createTRPCRouter({
         },
         include: { types: true },
       });
+
       return pokemons.map((pokemon) => ({
         id: pokemon.id,
         name: pokemon.name,
@@ -72,6 +77,7 @@ export const pokemonRouter = createTRPCRouter({
         type: true,
       },
     });
+
     return types.map((t) => t.type);
   }),
 });
